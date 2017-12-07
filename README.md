@@ -1,1 +1,3 @@
-creat a file named ".vimrc" in home directory and source files in folder vimrcs
+执行下面两个命令实现一键配置vim  
+chmod +x auto.sh  
+./auto.sh
