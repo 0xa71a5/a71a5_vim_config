@@ -30,6 +30,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tagbar'
 Bundle 'taglist.vim'
 Bundle 'TxtBrowser'
+Bundle 'ctrlpvim/ctrlp.vim'
 "Bundle 'YouCompleteMe'
 
 " =============================================================================

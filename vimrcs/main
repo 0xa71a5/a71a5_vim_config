@@ -21,7 +21,7 @@ if has("syntax")
     syntax on
 endif
 
-set mouse=a                    " 启用鼠标
+set mouse=v                    " 启用鼠标
 set t_Co=8                   " 在终端启用256色
 set backspace=2                " 设置退格键可用
 
@@ -44,7 +44,7 @@ set fileencoding=utf-8                                "设置当前文件编码
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1     "设置支持打开的文件的编码
 
 " 文件格式，默认 ffs=dos,unix
-set fileformat=dos                                   "设置新文件的<EOL>格式
+set fileformat=unix                                   "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac                          "给出文件的<EOL>格式类型
 
 " -----------------------------------------------------------------------------
@@ -71,18 +71,13 @@ set autoread
 
 " 常规模式下输入 cS 清除行尾空格
 nmap cS :%s/\s\+$//g<CR>:noh<CR>
-
+nmap 9 $
+nmap f g*
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nmap cM :%s/\r$//g<CR>:noh<CR>
 
 " 设置:w!为使用超级用户权限保存
 cmap w!<CR> w !sudo tee > /dev/null %<CR>
-
-" 防止没有松开shift导致麻烦
-cmap Q q
-cmap W w
-cnoremap qq Q
-cnoremap ww W
 
 set hlsearch                                          "高亮搜索
 set incsearch                                         "在输入要搜索的文字时，实时匹配
@@ -365,19 +360,19 @@ if has("cscope")
     if filereadable("cscope.out")
         cs add cscope.out
     "否则添加数据库环境中所指出的
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
+    elseif $cscope_db != ""
+        cs add $cscope_db
     endif
     set cscopeverbose
     "快捷键设置
-    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>s :cs find s <c-r>=expand("<cword>")<cr><cr>:copen<CR>
+    nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+     nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
+    nmap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
+    nmap <leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 endif
 
 " -----------------------------------------------------------------------------
@@ -391,7 +386,7 @@ set tags=./tags;                            "向上级目录递归查找tags文�
 " =============================================================================
 
 " 自动切换目录为当前编辑文件所在目录
-au BufRead,BufNewFile,BufEnter * cd %:p:h
+"au BufRead,BufNewFile,BufEnter * cd %:p:h
 
 " =============================================================================
 "                          << 其它 >>
