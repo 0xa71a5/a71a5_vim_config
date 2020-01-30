@@ -1,8 +1,10 @@
 rm -rf ~/.vim*
-mkdir ~/.vim
 touch ~/.vimrc
-cp -R * ~/.vim/
 rm -rf ~/.vim/auto.sh
+cp vim.tar.gz ~/
+cd ~/
+tar -zxvf vim.tar.gz
+rm ~/vim.tar.gz
 echo "source ~/.vim/vimrcs/main" >> ~/.vimrc
 echo "source ~/.vim/vimrcs/bundle" >> ~/.vimrc
-sudo apt-get install ctags
+sudo apt-get install ctags cscope
